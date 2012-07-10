@@ -34,3 +34,18 @@ module Reflector
     end
   end
 end
+
+# def pull_relevant_files(extension)
+#   file_list = Dir["some_app/**/*"]
+#   file_list.each do |file|
+#     read_and_save(file, extension)
+#   end
+# end
+# 
+# def read_and_save(file, extension)
+#   if File.file?(file) && file[-3, 3] == extension
+#     puts File.read(file)
+#   end
+# end
+# 
+# pull_relevant_files('.rb')
