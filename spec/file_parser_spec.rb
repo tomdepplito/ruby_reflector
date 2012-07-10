@@ -20,7 +20,7 @@ describe 'class Parser' do
 
   describe '#parse' do
 
-    it 'should be able to parse the taget method in this form: method(var)' do
+    it 'should be able to parse the target method in this form: method(var)' do
      @parser.parse.should include 'sub'
     end
 

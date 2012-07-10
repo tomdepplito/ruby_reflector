@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'rspec'
 require '../lib/repo_retrieve.rb'
 
@@ -8,7 +10,7 @@ describe Reflector::RepoRetrieve do
   end
 
   before :all do
-    @retrieve = Reflector::RepoRetrieve.new("https://github.com/Mayava/isHeAnAsshole")
+    @retrieve = Reflector::RepoRetrieve.new("https://github.com/Devbootcamp/RR_RnR")
   end
 
   it "initializes a new repo retrieve when passed a github url" do
@@ -16,18 +18,19 @@ describe Reflector::RepoRetrieve do
   end
 
   it "locates the clone url based on the github url" do
-    @retrieve.clone_url.should eq "git://github.com/Mayava/isHeAnAsshole.git"
+    @retrieve.clone_url.should eq "git://github.com/Devbootcamp/RR_RnR.git"
   end
 
   it "locates the clone url based on the github url" do
-    @retrieve.repository_name.should eq "isHeAnAsshole"
+    @retrieve.repository_name.should eq "RR_RnR"
   end
 
   it "clones the repository into /repos" do
     Dir.entries("../repos").length.should eq 3 #directories have . and .. by default
-    Dir.entries("../repos")[0].should eq "isHeAnAsshole"
+    Dir.entries("../repos")[2].should eq "RR_RnR"
   end
   
+  # This is currently tied to the above test.  We should really de-couple this.
   it "deletes the repository from /repos" do
     @retrieve.delete_repository
     Dir.entries("../repos").length.should eq 2 #directories have . and .. by default

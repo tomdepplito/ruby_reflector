@@ -12,7 +12,7 @@ module Reflector
     end
 
     def make_library
-      library_hash = {}
+      library_hash = {} #should probably rename this to library
       @raw_methods = @class_doc.css('div.entries a').collect{ |line| line.content.to_s } #this can be updated with John's new query
       @raw_methods.each do |line|
         unless line.split(' ')[1].nil? #this can go once we updated @raw_methods to ignore the nils
