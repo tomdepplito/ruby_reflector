@@ -13,8 +13,12 @@ module Reflector
       clone_repository
     end
 
-    # def clone_repository
-    #   system "git clone #@clone_url ../repos/#@repository_name"
-    # end
+    def clone_repository
+      system "git clone #@clone_url ../repos/#@repository_name"
+    end
+    
+    def delete_repository
+      system "rm -rf ../repos/#@repository_name"
+    end
   end
 end
