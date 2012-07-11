@@ -1,0 +1,105 @@
+Last login: Tue Jul 10 17:36:25 on ttys007
+ldbc03 spec (fileparser) $ ls
+coverage/              dir_parser_spec.rb     file_parser_spec.rb    library_spec.rb        repo_retrieve_spec.rb
+dbc03 spec (fileparser) $ cd ../
+dbc03 RR_RnR (fileparser) $ ls
+Gemfile    README.md  bin/       blah.rb    lib/       spec/      test.rb
+dbc03 RR_RnR (fileparser) $ cd ../
+dbc03 Desktop $ ls
+RR_RnR/                                classchat/                             tab_delimited_flashcards-38-terms.txt
+Todo_TDD/                              flashcards/                            todo/
+dbc03 Desktop $ cd todo
+ls
+Using: /Users/apprentice/.rvm/gems/ruby-1.9.3-p194@todo
+dbc03 todo $ ls
+coverage/     list_spec.rb* task_spec.rb* todo.txt*     todo_3.txt*   todo_5.txt*
+list.rb*      task.rb*      todo.rb*      todo_2.txt*   todo_4.txt*
+dbc03 todo $ vim task.rb
+dbc03 todo $ cd ../
+dbc03 Desktop $ ls
+RR_RnR/                                classchat/                             tab_delimited_flashcards-38-terms.txt
+Todo_TDD/                              flashcards/                            todo/
+dbc03 Desktop $ cd Todo_TDD
+dbc03 Todo_TDD $ ls
+tank.rb       task.rb       task_spec.rb
+dbc03 Todo_TDD $ vim tank.rb
+dbc03 Todo_TDD $ vim task
+dbc03 Todo_TDD $ vim task.rb
+dbc03 Todo_TDD $ cd ../
+dbc03 Desktop $ ls
+RR_RnR/                                classchat/                             tab_delimited_flashcards-38-terms.txt
+Todo_TDD/                              flashcards/                            todo/
+dbc03 Desktop $ cds flashcards/
+-bash: cds: command not found
+dbc03 Desktop $ ls
+RR_RnR/                                classchat/                             tab_delimited_flashcards-38-terms.txt
+Todo_TDD/                              flashcards/                            todo/
+dbc03 Desktop $ cd flashcards/
+ldbc03 flashcards (master) $ ls
+card.rb         coverage/       game.rb         stack.rb
+card_spec.rb    flashcards.txt  game_spec.rb    stack_spec.rb
+dbc03 flashcards (master) $ vim card.rb
+dbc03 flashcards (master) $ cd ../RR_RnR/
+dbc03 RR_RnR (fileparser) $ ls
+Gemfile    README.md  bin/       blah.rb    lib/       spec/      test.rb
+dbc03 RR_RnR (fileparser) $ cd spec
+dbc03 spec (fileparser) $ ls
+coverage/              dir_parser_spec.rb     file_parser_spec.rb    library_spec.rb        repo_retrieve_spec.rb
+dbc03 spec (fileparser) $ irb
+1.9.3-p194 :001 > require 'ripper-plus'
+ => true
+1.9.3-p194 :002 > parser = Ripper::CleanSexpParser.new(File.read('file_parser_spec.rb'))
+NameError: uninitialized constant Ripper::CleanSexpParser
+  from (irb):2
+  from /Users/apprentice/.rvm/rubies/ruby-1.9.3-p194/bin/irb:16:in `<main>'
+1.9.3-p194 :003 > parser = Ripper::CleanSexpBuilder.new(File.read('file_parser_spec.rb'))
+NameError: uninitialized constant Ripper::CleanSexpBuilder
+  from (irb):3
+  from /Users/apprentice/.rvm/rubies/ruby-1.9.3-p194/bin/irb:16:in `<main>'
+1.9.3-p194 :004 > require 'clean_ripper'
+ => true
+1.9.3-p194 :005 > parser = Ripper::CleanSexpBuilder.new(File.read('file_parser_spec.rb'))
+ => #<Ripper::CleanSexpBuilder:0x007ff8e38a36b0>
+1.9.3-p194 :006 > builder = Ripper::CleanSexpBuilder.new(File.read('file_parser_spec.rb'))
+ => #<Ripper::CleanSexpBuilder:0x007ff8e5031e80>
+1.9.3-p194 :007 > calls = 0
+ => 0
+1.9.3-p194 :008 > builder.on_call { |tokens| calls +=1 }
+NoMethodError: undefined method `[]' for nil:NilClass
+  from /Users/apprentice/.rvm/gems/ruby-1.9.3-p194/gems/clean_ripper-0.0.2/lib/clean_sexp_builder.rb:129:in `on_call'
+  from (irb):8
+  from /Users/apprentice/.rvm/rubies/ruby-1.9.3-p194/bin/irb:16:in `<main>'
+1.9.3-p194 :009 > class DemoBuilder < Ripper::CleanSexpBuilder
+1.9.3-p194 :010?>   def initialize(*args)
+1.9.3-p194 :011?>     super
+1.9.3-p194 :012?>     @count = 0
+1.9.3-p194 :013?>     end
+1.9.3-p194 :014?>   def on_call(*args)
+1.9.3-p194 :015?>     @count += 1
+1.9.3-p194 :016?>     super
+1.9.3-p194 :017?>     end
+1.9.3-p194 :018?>   end
+ => nil
+1.9.3-p194 :019 > builder = DemoBuilder.new(File.read('file_parser_spec.rb'))
+ => #<DemoBuilder:0x007ff8e5002388>
+1.9.3-p194 :020 > builder.parse
+ => [:program, [:call, nil, :require, [[:lit, "simplecov"]], nil], [:call, [:const, :SimpleCov], :start, [], nil], [:call, nil, :require, [[:lit, "rspec"]], nil], [:call, nil, :require, [[:lit, "../lib/file_parser.rb"]], nil], [:call, nil, :include, [[:const, :Reflector]], nil], [:call, nil, :describe, [[:lit, "class Parser"]], [:brace_block, [], [:block, [:call, nil, :before, [[:lit, :each]], [:brace_block, [], [:block, [:assign, [:ivar, :@parser], [:call, [:const, :Parser], :new, [[:lit, "../test.rb"]], nil]], [:assign, [:ivar, :@parser2], [:call, [:const, :Parser], :new, [[:lit, "../test.rb"]], nil]], [:assign, [:ivar, :@parsequotes], [:call, [:const, :Parser], :new, [[:lit, "../test.rb"]], nil]], [:assign, [:ivar, :@short_text], [:call, [:call, [:const, :File], :stub, [[:lit, :read]], nil], :and_return, [[:lit, "'to_s''fcy'\\'urtcv'"]], nil]], [:assign, [:ivar, :@parser3], [:call, [:const, :Parser], :new, [[:lit, "test"]], nil]]]]], [:call, nil, :describe, [[:lit, "#save_interpolation"]], [:brace_block, [], [:block, [:call, nil, :it, [[:lit, "should not include string interpolation braces"]], [:brace_block, [], [:block, [:command_call, [:call, [:ivar, :@parser2], :save_interpolation, [], nil], :".", [:ident, :should_not], [[:call, nil, :include, [[:lit, "\#{"]], nil]]], [:command_call, [:call, [:ivar, :@parser2], :save_interpolation, [], nil], :".", [:ident, :should_not], [[:call, nil, :include, [[:lit, "}"]], nil]]]]]], [:call, nil, :it, [[:lit, "should include non-character word inside of braces"]], [:brace_block, [], [:block, [:command_call, [:call, [:ivar, :@parser2], :save_interpolation, [], nil], :".", [:ident, :should], [[:call, nil, :include, [[:lit, "thisshould"]], nil]]]]]]]]], [:call, nil, :describe, [[:lit, "#find_string_locations"]], [:brace_block, [], [:block, [:call, nil, :it, [[:lit, "should return an array of locations for quotes"]], [:brace_block, [], [:block, [:command_call, [:call, [:ivar, :@parser3], :find_string_locations, [], nil], :".", [:ident, :should], [[:call, nil, :eq, [[:array, [:lit, 0], [:lit, 2], [:lit, 5], [:lit, 7]]], nil]]]]]]]]], [:call, nil, :describe, [[:lit, "#parse"]], [:brace_block, [], [:block, [:call, nil, :it, [[:lit, "should be able to parse the target method in this form: method(var)"]], [:brace_block, [], [:block, [:command_call, [:call, [:ivar, :@parser], :parse, [], nil], :".", [:ident, :should], [[:call, nil, :include, [[:lit, "sub"]], nil]]]]]], [:call, nil, :it, [[:lit, "should not include any words that follow def"]], [:brace_block, [], [:block, [:command_call, [:call, [:ivar, :@parser], :parse, [], nil], :".", [:ident, :should_not], [[:call, nil, :include, [[:lit, "aliases_for"]], nil]]]]]], [:call, nil, :it, [[:lit, "should still include methods found in string interpolation"]], [:brace_block, [], [:block, [:command_call, [:call, [:ivar, :@parser2], :parse, [], nil], :".", [:ident, :should], [[:call, nil, :include, [[:lit, "new_entry"]], nil]]]]]], [:call, nil, :it, [[:lit, "should not include method names that are commented out"]], [:brace_block, [], nil]]]]], [:call, nil, :describe, [[:lit, "#remove_comments"]], [:brace_block, [], [:block, [:call, nil, :it, [[:lit, "should remove comments"]], [:brace_block, [], nil]]]]]]]]]
+1.9.3-p194 :021 > builder
+ => #<DemoBuilder:0x007ff8e5002388>
+1.9.3-p194 :022 > builder.instance_variables
+ => [:@source, :@count]
+1.9.3-p194 :023 > [1,2,3].map { |a| a + 1 }
+ => [2, 3, 4]
+1.9.3-p194 :024 > builder.call
+NoMethodError: undefined method `call' for #<DemoBuilder:0x007ff8e5002388>
+  from (irb):24
+  from /Users/apprentice/.rvm/rubies/ruby-1.9.3-p194/bin/irb:16:in `<main>'
+1.9.3-p194 :025 > builder.on_call
+NoMethodError: undefined method `[]' for nil:NilClass
+  from /Users/apprentice/.rvm/gems/ruby-1.9.3-p194/gems/clean_ripper-0.0.2/lib/clean_sexp_builder.rb:129:in `on_call'
+  from (irb):16:in `on_call'
+  from (irb):25
+  from /Users/apprentice/.rvm/rubies/ruby-1.9.3-p194/bin/irb:16:in `<main>'
+1.9.3-p194 :026 > builder.on_call(:call)
+ => [:call, :call, "a", [], nil]
+1.9.3-p194 :027 >
