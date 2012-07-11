@@ -1,17 +1,17 @@
 module Reflector
-  class MethodStats
+  class FileStats
 
     def initialize
-      @stats = {}
+      @file_stats = {}
     end
 
     def inc_method(method)
       key = method.to_s.to_sym
-      @stats.include?(key) ? @stats[key] += 1 : @stats[key] = 1
+      @file_stats.include?(key) ? @file_stats[key] += 1 : @file_stats[key] = 1
     end
 
     def stats_results
-      @stats
+      @file_stats
     end
   end
 end

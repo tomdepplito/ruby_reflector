@@ -3,14 +3,14 @@ SimpleCov.start
 require 'rspec'
 require '../lib/method_stats.rb'
 
-describe Reflector::MethodStats do
+describe Reflector::FileStats do
 
   before :each do
-    @stats = Reflector::MethodStats.new
+    @stats = Reflector::FileStats.new
   end
 
   it "initializes with a method name" do
-    @stats.should be_an_instance_of Reflector::MethodStats
+    @stats.should be_an_instance_of Reflector::FileStats
   end
 
   describe "#stats_results" do
