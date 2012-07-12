@@ -1,5 +1,5 @@
 require 'sqlite3'
-require 'library.rb'
+# require 'library.rb'
 
 module Reflector
   class ProjectStats

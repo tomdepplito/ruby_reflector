@@ -6,6 +6,7 @@ module Reflector
     attr_reader :clone_url, :repository_name
 
     def initialize(repo_url)
+      #@repository.delete_repository if exists    do it here
       @github_doc      = Nokogiri::HTML(open(repo_url))
       @clone_url       = @github_doc.css('li.public_clone_url a').map { |line| line['href'] }[0] #need to get a better way than map
       @repository_name = @github_doc.css('a.js-current-repository').map { |line| line.content }[0]

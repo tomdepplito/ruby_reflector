@@ -47,6 +47,13 @@ module Reflector
       end
     end
 
+    def methods_stats_read(repo_name)
+      # Need to fix the fact that we get extra data besides name, count {"name"=>"length", "count"=>3, 0=>"length", 1=>3}
+      sql = "SELECT methods.name, methods_stats.count FROM methods, methods_stats WHERE methods.id = methods_stats.method_id AND methods_stats.repo_id = (?)"
+      repo_id = repo_id(repo_name)
+      Reflector::Database.connection.execute(sql, repo_id)
+    end
+
     private
       #Need to debug why we're getting nil method names here
       def method_id(name)
@@ -58,5 +65,17 @@ module Reflector
         sql = "SELECT id FROM repos WHERE name = (?)"
         Reflector::Database.connection.execute(sql, name)[0]["id"]
       end
+
+      def method_name(id)
+        sql = "SELECT name FROM methods WHERE id = (?)"
+        Reflector::Database.connection.execute(sql, id)[0]["name"]
+      end
+
+      def repo_name(id)
+        sql = "SELECT name FROM repos WHERE id = (?)"
+        Reflector::Database.connection.execute(sql, id)[0]["name"]
+      end
+
+
   end
 end
