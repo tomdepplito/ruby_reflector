@@ -2,10 +2,17 @@
 #docopt?
 require '../lib/dir_parser.rb'
 require '../lib/repo_retrieve.rb'
-require '../lib/library.rb'
 require '../lib/file_parser.rb'
 require '../lib/project_stats.rb'
 require '../lib/database.rb'
+require '../lib/library.rb'
+require '../lib/presentation.rb'
+
+####################
+#This is just here for testing
+####################
+
+# system 'rm -rf ../repos/*.*'
 
 @url = ARGV[0]
 @library = Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
@@ -23,17 +30,12 @@ puts "Creating our ruby library"
 # instantiates a new method_stats class per file
 methods = @files.collect { |file|  puts file; Reflector::Parser.new(file).method_array }
 
+puts "Constructing repo stats"
 project_stats = Reflector::ProjectStats.new(@repository.repository_name) #needs to be created: url and commit_date
 
-# @repository.repository_name,
-# "something",
-# @repository.clone_url,
-# "something"
 project_stats.inc_stats(methods)
-# puts project_stats.stats_results
-# projects_stats.stats_results = {:methods => {:length => 1, :== => 2, :some_other_method => 5}, :name => "name", :url => "url", :clone_url => "clone url", :commit_date => "some date here"}
 
-puts project_stats.stats_results.inspect
+puts project_stats.stats_results
 
 @db.repos_write({
     :url => "https://github.com/Devbootcamp/RR_RnR",
@@ -48,11 +50,9 @@ puts project_stats.stats_results.inspect
 
 #
 puts "Holy shit.  It might have worked.  Check the ../db/reflector.db"
-#
-# # db.save(project_stats.stats_results)
-# #
-# # @presentation = Reflector::Presentation.new(from_db_somehow)
-# # presentation.show
-# # # pull top 10 or whatever ruby git repos for comparison
-#
-@repository.delete_repository
+
+
+@presentation = Reflector::Presentation.new(@db.method_stats_read(@repository.repository_name))
+puts @presentation.console_print
+
+

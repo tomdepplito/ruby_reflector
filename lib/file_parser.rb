@@ -1,5 +1,6 @@
 require 'ripper'
 require 'clean_ripper'
+# require './library.rb'
 
 module Reflector
   class Parser
