@@ -3,15 +3,16 @@ require 'sqlite3'
 module Reflector
   class Database
 
-    def initialize
-      @db = SQLite3::Database.new( "../db/reflector.db" )
+    def initialize(file_path)
+      @@file_path = file_path
+      @db = SQLite3::Database.new( file_path )
       @db.execute_batch( File.read('../db/schema.sql') )
       @db.close
     end
 
     def self.connection
         unless @connection
-          @connection = SQLite3::Database.new("../db/reflector.db")
+          @connection = SQLite3::Database.new( @@file_path )
           @connection.results_as_hash = true
         end
         @connection
@@ -26,6 +27,7 @@ module Reflector
 
     def repos_get
       sql = "SELECT * FROM repos"
+
       Reflector::Database.connection.execute(sql)
     end
 

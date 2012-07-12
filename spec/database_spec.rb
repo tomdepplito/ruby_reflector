@@ -7,8 +7,8 @@ require '../lib/library.rb'
 include Reflector
 
 describe Database do
-    let( :database ) { Reflector::Database.new }
-    let( :db ) { SQLite3::Database.new("../db/reflector.db") }
+    let( :database ) { Reflector::Database.new("../db/reflector_test.db") }
+    let( :db ) { SQLite3::Database.new("../db/reflector_test.db") }
 
     before :all do
       lib ||= Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
@@ -16,12 +16,12 @@ describe Database do
     end
 
     after :all do
-      File.delete('../db/reflector.db')
+      File.delete('../db/reflector_test.db')
     end
 
     it "the database exists" do
       database
-      File.exists?( "../db/reflector.db" ).should be_true
+      File.exists?( "../db/reflector_test.db" ).should be_true
     end
 
     it "has 3 tables and the sqlite sequence table" do
