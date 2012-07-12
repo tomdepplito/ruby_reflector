@@ -12,7 +12,7 @@ require '../lib/database.rb'
 @repository = Reflector::RepoRetrieve.new(@url)
 @files = Reflector::DirParser.new("../repos/" + @repository.repository_name).files # Gives us all our files
 puts "Creating our local database"
-@db = Reflector::Database.new
+@db = Reflector::Database.new('../db/reflector.db')
 
 # write the library to the DB FIRST!!!!!!
 puts "Creating our ruby library"
