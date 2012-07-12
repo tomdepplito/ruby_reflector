@@ -26,14 +26,17 @@ describe RepoRetrieve do
   end
 
   it "clones the repository into /repos" do
-    Dir.entries("../repos").length.should eq 3 #directories have . and .. by default
-    Dir.entries("../repos")[2].should eq "RR_RnR"
+    Dir.entries("../repos").include?(@retrieve.repository_name).should be true
+  end
+
+  it "creates a directory parser object after cloning a repository" do
+    @retrieve.should
   end
 
   # This is currently tied to the above test.  We should really de-couple this.
   it "deletes the repository from /repos" do
     @retrieve.delete_repository
-    Dir.entries("../repos").length.should eq 2 #directories have . and .. by default
+    Dir.entries("../repos").include?(@retrieve.repository_name).should_not be true
   end
 
   #What do we do when we get an invalid github URL?

@@ -18,9 +18,6 @@ require '../lib/presentation.rb'
 
 @url = ARGV[0]
 
-# Already in file_parser, adding it to db
-# @library = Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
-
 @repository = Reflector::RepoRetrieve.new(@url)
 @files = Reflector::DirParser.new("../repos/" + @repository.repository_name).files # Gives us all our files
 puts "Creating our local database"
