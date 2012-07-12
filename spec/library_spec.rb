@@ -2,6 +2,7 @@ require 'simplecov'
 SimpleCov.start
 require 'rspec'
 require '../lib/library.rb'
+require 'spec_helper.rb'
 
 describe Reflector::Library do
 

@@ -3,6 +3,7 @@ SimpleCov.start
 require 'rspec'
 require '../lib/database.rb'
 require '../lib/library.rb'
+require 'spec_helper.rb'
 
 include Reflector
 
