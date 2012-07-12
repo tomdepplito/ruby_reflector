@@ -30,7 +30,7 @@ puts "Creating our ruby library"
 # parses each file
 # does the lookup to the library
 # instantiates a new method_stats class per file
-methods = @files.collect { |file|  puts file; Reflector::Parser.new(file).method_array }
+methods = @files.collect { |file|  puts file; Reflector::Parser.new(file, @library).method_array }
 
 puts "Constructing repo stats"
 project_stats = Reflector::ProjectStats.new(@repository.repository_name) #needs to be created: url and commit_date
@@ -47,14 +47,13 @@ puts project_stats.stats_results
     :methods => project_stats.stats_results
 })
 
-# presentation = Reflector::Presentation.new(@db.read_repo(@repository.repository_name))
-# presentation.console_print
+# puts @db.method_stats_read(@repository.repository_name)
 
-#
 puts "Holy shit.  It might have worked.  Check the ../db/reflector.db"
 
 
-@presentation = Reflector::Presentation.new(@db.method_stats_read(@repository.repository_name))
+@presentation = Reflector::Presentation.new(@db.methods_stats_read(@repository.repository_name), @repository.repository_name)
 puts @presentation.console_print
 
+@repository.delete_repository
 
