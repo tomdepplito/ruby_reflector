@@ -3,8 +3,8 @@ require 'clean_ripper'
 
 module Reflector
   class Parser
-
     attr_reader :method_array
+
     def initialize(source)
       @source = read_source(source)
       @sexp   = Ripper::CleanSexpBuilder.parse(@source)

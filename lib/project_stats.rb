@@ -10,7 +10,11 @@ module Reflector
     end
 
     def inc_stats(stats)
-      @project_stats.merge!(stats) {|key, value1, value2| value1 + value2 }
+      stats.compact.each do |file|
+        file.compact.each do |method|
+          @project_stats[method].nil? ? @project_stats[method] = 1 : @project_stats[method] += 1
+        end
+      end
     end
 
     def stats_results

@@ -11,10 +11,16 @@ require '../lib/repo_retrieve.rb'
 # parses each file
 # does the lookup to the library
 # instantiates a new method_stats class per file
-@files.each { |file| Reflector::Parser.new(file) }
+methods = @files.collect { |file| Reflector::Parser.new(file).method_array }
 
 # @file_stats ||= Reflector::FileStats.new
+projects stats --> {:name, :url, :clone_url, :commit_date, :methods => []}
 
+Reflector::ProjectStats.new(methods,
+                            @repository.name,
+                            @repository.url, #needs to be created
+                            @repository.clone_url,
+                            @repository.commit_date) #needs to be created
 
 # combine all the file stats to get the project stats
 # write to the DB
