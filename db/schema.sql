@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS repos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name VARCHAR NOT NULL,
+    url VARCHAR NULL,
+    clone_url VARCHAR NULL,
+    last_commit_date DATETIME NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS methods (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name VARCHAR NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS methods_stats (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    repo_id INTEGER NOT NULL,
+    method_id INTEGER NOT NULL,
+    count INTEGER NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    FOREIGN KEY(repo_id) REFERENCES repos(id),
+    FOREIGN KEY(method_id) REFERENCES methods(id)
+);
+

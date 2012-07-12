@@ -23,6 +23,3 @@ require '../lib/repo_retrieve.rb'
 # pull top 10 or whatever ruby git repos for comparison
 
 @repository.delete_repository
-
-
-

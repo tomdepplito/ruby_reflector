@@ -29,6 +29,7 @@ describe Reflector::Library do
   it "returns methods from the library" do
     @class_doc.methods_list.should include "length"
     @class_doc.methods_list.should include "collect!"
+    puts @class_doc.methods_list.length
   end
 
   it "does not duplicate method names in the array" do
