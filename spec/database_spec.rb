@@ -9,8 +9,11 @@ describe Database do
     let( :db ) { SQLite3::Database.new("../db/reflector_test.db") }
 
     before :all do
-      lib ||= Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
-      lib.methods_list.each { |method| database.methods_write(method) }
+      database.methods_write
+    end
+
+    it "writes the methods library to the db" do
+      db.execute("SELECT * FROM methods").length.should eq 850
     end
 
     after :all do
@@ -47,10 +50,6 @@ describe Database do
       rs.count.should eq repos_rows[0][0]
     end
 
-    it "writes the methods library to the db" do
-      db.execute("SELECT * FROM methods").length.should eq 850
-    end
-
     it "writes the repo and its methods to the db" do
       database.repos_write({
           :url => "https://github.com/Devbootcamp/RR_RnR",
@@ -63,9 +62,6 @@ describe Database do
     end
 
     it "reads the methods from the db based on a repo name" do
-      puts database.methods_stats_read("RR_RnR")
-      puts database.methods_stats_read("RR_RnR").class
-      puts puts database.methods_stats_read("RR_RnR")[0].class
       database.methods_stats_read("RR_RnR").length.should eq 10
     end
 end

@@ -31,9 +31,12 @@ module Reflector
       Reflector::Database.connection.execute(sql)
     end
 
-    def methods_write(method)
-      sql = "INSERT INTO methods (name,created_at,updated_at) VALUES (?,?,?)"
-      Reflector::Database.connection.execute(sql,method,Time.now.to_s, Time.now.to_s)
+    def methods_write
+      lib ||= Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
+      lib.methods_list.each do |method|
+        sql = "INSERT INTO methods (name,created_at,updated_at) VALUES (?,?,?)"
+        Reflector::Database.connection.execute(sql,method,Time.now.to_s, Time.now.to_s)
+      end
     end
 
     #This can use some serious optimizing later
