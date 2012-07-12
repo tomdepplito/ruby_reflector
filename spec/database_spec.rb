@@ -10,11 +10,14 @@ describe Database do
     let( :database ) { Reflector::Database.new }
     let( :db ) { SQLite3::Database.new("../db/reflector.db") }
 
+    before :all do
+      lib ||= Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
+      lib.methods_list.each { |method| database.methods_write(method) }
+    end
+
     after :all do
       File.delete('../db/reflector.db')
     end
-
-    context "#initialize" do
 
     it "the database exists" do
       database
@@ -30,7 +33,8 @@ describe Database do
           :url => "https://github.com/Devbootcamp/RR_RnR",
           :clone_url => "https://github.com/Devbootcamp/RR_RnR.git",
           :last_commit_date => "NULL",
-          :name => "RR_RnR"
+          :name => "RR_RnR",
+          :methods => { :length => 3, :== => 2, :include? => 1, :each => 1, :map => 1 }
       })
       db.execute("SELECT * FROM repos").first[0].should eq 1
       db.execute("SELECT * FROM repos").first[1].should eq "RR_RnR"
@@ -46,11 +50,19 @@ describe Database do
     end
 
     it "writes the methods library to the db" do
-      lib = Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
-      lib.methods_list.each { |method| database.methods_write(method) }
       db.execute("SELECT * FROM methods").length.should eq 850
     end
-  end
 
+    it "writes the repo and its methods to the db" do
+      database.repos_write({
+          :url => "https://github.com/Devbootcamp/RR_RnR",
+          :clone_url => "https://github.com/Devbootcamp/RR_RnR.git",
+          :last_commit_date => "NULL",
+          :name => "RR_RnR",
+          :methods => { :length => 3, :== => 2, :include? => 1, :each => 1, :map => 1 }
+      })
+      db.execute("SELECT methods_stats.count FROM methods_stats INNER JOIN methods ON methods.id = methods_stats.method_id WHERE methods.name like 'length'")[0][0].should eq 3
+    end
 end
+
 
