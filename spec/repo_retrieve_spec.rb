@@ -1,21 +1,20 @@
-require 'simplecov'
-SimpleCov.start
-require 'rspec'
 require '../lib/repo_retrieve.rb'
 require 'spec_helper.rb'
 
-describe Reflector::RepoRetrieve do
+include Reflector
+
+describe RepoRetrieve do
 
   it "will not initialize a new repo without a url" do
-    expect { fail_retrieve = Reflector::RepoRetrieve.new }.should raise_error
+    expect { fail_retrieve = RepoRetrieve.new }.should raise_error
   end
 
   before :all do
-    @retrieve = Reflector::RepoRetrieve.new("https://github.com/Devbootcamp/RR_RnR")
+    @retrieve = RepoRetrieve.new("https://github.com/Devbootcamp/RR_RnR")
   end
 
   it "initializes a new repo retrieve when passed a github url" do
-    @retrieve.should be_an_instance_of Reflector::RepoRetrieve
+    @retrieve.should be_an_instance_of RepoRetrieve
   end
 
   it "locates the clone url based on the github url" do

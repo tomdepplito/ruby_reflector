@@ -1,6 +1,3 @@
-require 'simplecov'
-SimpleCov.start
-require 'rspec'
 require '../lib/project_stats.rb'
 require 'spec_helper.rb'
 

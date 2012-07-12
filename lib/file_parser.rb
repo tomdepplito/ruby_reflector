@@ -3,7 +3,6 @@ require 'clean_ripper'
 
 module Reflector
   class Parser
-    attr_reader :method_array
 
     def initialize(source)
       @source = File.read(source)
@@ -12,7 +11,19 @@ module Reflector
       build_counts!(@sexp)
     end
 
+    def method_array
+      array = []
+      library_object = Library.new('http://ruby-doc.org/core-1.9.3/')
+      @method_array.each do |method|
+        if library_object.is_method?(method.to_s)
+          array << method
+        end
+      end
+      array
+    end
+
     private
+
     def build_counts!(sexp)
       parse(sexp)
       # Don't call build_counts! for atoms
@@ -27,5 +38,6 @@ module Reflector
         @method_array << sexp[2]
       end
     end
+
   end
 end

@@ -7,6 +7,8 @@ require '../lib/file_parser.rb'
 require '../lib/project_stats.rb'
 require '../lib/database.rb'
 
+
+
 @url = ARGV[0]
 @library = Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
 @repository = Reflector::RepoRetrieve.new(@url)

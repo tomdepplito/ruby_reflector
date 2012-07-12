@@ -1,20 +1,12 @@
-require 'simplecov'
-SimpleCov.start
-require 'rspec'
 require '../lib/file_parser.rb'
 require 'spec_helper.rb'
 require 'test_file.rb'
 
 include Reflector
 
-
 describe Parser do
 
-  context '#method_array' do
-    it 'contains non-object methods' do
-      Parser.new('test_file.rb').method_array.should include :foobar
-    end
-
+  describe '#method_array' do
     it 'should print out all method calls' do
       Parser.new('test_file.rb').method_array.should include :collect
     end
@@ -22,5 +14,10 @@ describe Parser do
     it 'should find multiple instances of the same method call' do
       Parser.new('test_file.rb').method_array.should include :map, :map
     end
+
+    it 'should only contain methods in the core library' do
+      Parser.new('test_file.rb').method_array.should_not include :foobar
+    end
   end
+
 end
