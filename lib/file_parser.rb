@@ -6,7 +6,7 @@ module Reflector
     attr_reader :method_array
 
     def initialize(source)
-      @source = read_source(source)
+      @source = File.read(source)
       @sexp   = Ripper::CleanSexpBuilder.parse(@source)
       @method_array = []
       build_counts!(@sexp)
@@ -27,15 +27,5 @@ module Reflector
         @method_array << sexp[2]
       end
     end
-
-    def read_source(source)
-      case source
-      when String
-        source
-      else
-        source.read
-      end
-    end
   end
 end
-
