@@ -2,6 +2,7 @@ require 'simplecov'
 SimpleCov.start
 require 'rspec'
 require '../lib/repo_retrieve.rb'
+require 'spec_helper.rb'
 
 describe Reflector::RepoRetrieve do
 
