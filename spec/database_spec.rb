@@ -63,6 +63,13 @@ describe Database do
       })
       db.execute("SELECT methods_stats.count FROM methods_stats INNER JOIN methods ON methods.id = methods_stats.method_id WHERE methods.name like 'length'")[0][0].should eq 3
     end
+
+    it "reads the methods from the db based on a repo name" do
+      puts database.methods_stats_read("RR_RnR")
+      puts database.methods_stats_read("RR_RnR").class
+      puts puts database.methods_stats_read("RR_RnR")[0].class
+      database.methods_stats_read("RR_RnR").length.should eq 10
+    end
 end
 
 

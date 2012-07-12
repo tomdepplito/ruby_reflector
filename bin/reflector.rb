@@ -42,6 +42,10 @@ puts project_stats.stats_results.inspect
     :name => "RR_RnR",
     :methods => project_stats.stats_results
 })
+
+# presentation = Reflector::Presentation.new(@db.read_repo(@repository.repository_name))
+# presentation.console_print
+
 #
 puts "Holy shit.  It might have worked.  Check the ../db/reflector.db"
 #
