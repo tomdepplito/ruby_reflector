@@ -14,10 +14,12 @@ module  Reflector
 #{@repo_name}, Top 20 Methods
 ********************************************************
 ========================================================
-Rank\t|\tMethod\t|\tCount
+Rank\t|\tMethod\t\t\t|\tCount
 ========================================================"
-      @stats.each_with_index { |stat, index| report << "#{index + 1}.\t|\t#{stat['name']}\t|\t#{stat['count']}" }
+      @stats.each_with_index { |stat, index| report << "#{index + 1}.\t|\t#{stat['name']}\t\t\t|\t#{stat['count']}" }
+
       report
     end
   end
 end
+

@@ -14,10 +14,7 @@ module Reflector
     def inc_stats(stats)
       stats.compact.each do |file|
         file.compact.each do |method|
-          #Last minute check to see if we're dealing with core library, only
-          # if @library.is_method?(method)
-            @project_stats[method].nil? ? @project_stats[method] = 1 : @project_stats[method] += 1
-          # end
+          @project_stats[method.to_s].nil? ? @project_stats[method.to_s] = 1 : @project_stats[method.to_s] += 1
         end
       end
     end

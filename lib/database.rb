@@ -7,6 +7,9 @@ module Reflector
       @@file_path = file_path
       @db = SQLite3::Database.new( file_path )
       @db.execute_batch( File.read('../db/schema.sql') )
+      unless methods_read.count > 849
+        methods_write
+      end
       @db.close
     end
 
@@ -27,7 +30,6 @@ module Reflector
 
     def repos_get
       sql = "SELECT * FROM repos"
-
       Reflector::Database.connection.execute(sql)
     end
 
@@ -37,6 +39,11 @@ module Reflector
         sql = "INSERT INTO methods (name,created_at,updated_at) VALUES (?,?,?)"
         Reflector::Database.connection.execute(sql,method,Time.now.to_s, Time.now.to_s)
       end
+    end
+
+    def methods_read
+      sql = "SELECT name FROM methods"
+      Reflector::Database.connection.execute(sql)
     end
 
     #This can use some serious optimizing later
@@ -52,7 +59,8 @@ module Reflector
 
     def methods_stats_read(repo_name)
       # Need to fix the fact that we get extra data besides name, count {"name"=>"length", "count"=>3, 0=>"length", 1=>3}
-      sql = "SELECT methods.name, methods_stats.count FROM methods, methods_stats WHERE methods.id = methods_stats.method_id AND methods_stats.repo_id = (?)"
+      # Need to test the descending order
+      sql = "SELECT methods.name, methods_stats.count FROM methods, methods_stats WHERE methods.id = methods_stats.method_id AND methods_stats.repo_id = (?) ORDER BY methods_stats.count DESC"
       repo_id = repo_id(repo_name)
       Reflector::Database.connection.execute(sql, repo_id)
     end

@@ -15,22 +15,27 @@ require '../lib/presentation.rb'
 # system 'rm -rf ../repos/*.*'
 
 
-
 @url = ARGV[0]
 
+
 @repository = Reflector::RepoRetrieve.new(@url)
-@files = Reflector::DirParser.new("../repos/" + @repository.repository_name).files # Gives us all our files
-puts "Creating our local database"
 @db = Reflector::Database.new('../db/reflector.db')
 
+
+@files = Reflector::DirParser.new("../repos/" + @repository.repository_name).files # Gives us all our files
+
+
+puts "Creating our local database"
+#@db = Reflector::Database.new('../db/reflector.db')
+
 # write the library to the DB FIRST!!!!!!
-puts "Creating our ruby library"
-@library.methods_list.each { |method| @db.methods_write(method) }
+# puts "Creating our ruby library"
+# @library.methods_list.each { |method| @db.methods_write(method) }
 
 # parses each file
 # does the lookup to the library
 # instantiates a new method_stats class per file
-methods = @files.collect { |file|  puts file; Reflector::Parser.new(file, @library).method_array }
+methods = @files.collect { |file|  puts file; Reflector::Parser.new(file).method_array }
 
 puts "Constructing repo stats"
 project_stats = Reflector::ProjectStats.new(@repository.repository_name) #needs to be created: url and commit_date
@@ -43,7 +48,7 @@ puts project_stats.stats_results
     :url => "https://github.com/Devbootcamp/RR_RnR",
     :clone_url => @repository.clone_url,
     :last_commit_date => "NULL",
-    :name => "RR_RnR",
+    :name => @repository.repository_name,
     :methods => project_stats.stats_results
 })
 

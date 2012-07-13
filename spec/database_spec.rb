@@ -8,14 +8,6 @@ describe Database do
     let( :database ) { Reflector::Database.new("../db/reflector_test.db") }
     let( :db ) { SQLite3::Database.new("../db/reflector_test.db") }
 
-    before :all do
-      database.methods_write
-    end
-
-    it "writes the methods library to the db" do
-      db.execute("SELECT * FROM methods").length.should eq 850
-    end
-
     after :all do
       File.delete('../db/reflector_test.db')
     end
@@ -23,6 +15,10 @@ describe Database do
     it "the database exists" do
       database
       File.exists?( "../db/reflector_test.db" ).should be_true
+    end
+
+    it "writes the methods library to the db" do
+      db.execute("SELECT * FROM methods").length.should eq 850
     end
 
     it "has 3 tables and the sqlite sequence table" do
