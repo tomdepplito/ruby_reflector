@@ -1,2 +1,8 @@
-#nokogiri goes here
-#gem "sqlite3", "~> 1.3.6"
+source :rubygems
+
+gem 'rspec'
+gem 'nokogiri'
+gem 'fakeweb'
+gem 'sqlite3'
+gem 'simplecov'
+gem 'clean_ripper'
