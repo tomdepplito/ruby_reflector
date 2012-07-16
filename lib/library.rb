@@ -34,8 +34,9 @@ module Reflector
     end
 
     private
-      def raw_methods
-        @class_doc.css('div.entries a').collect{ |line| line.content.to_s if line.content.to_s.match(/\(.+\)/) }.compact!
-      end
+
+    def raw_methods
+      @class_doc.css('div.entries a').collect{ |line| line.content.to_s if line.content.to_s.match(/\(.+\)/) }.compact!
+    end
   end
 end

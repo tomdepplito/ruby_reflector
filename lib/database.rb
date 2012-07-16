@@ -65,26 +65,27 @@ module Reflector
     end
 
     private
-      #Need to debug why we're getting nil method names here
-      def method_id(name)
-        sql = "SELECT id FROM methods WHERE name = (?)"
-        Reflector::Database.connection.execute(sql, name.to_s)[0]["id"]
-      end
 
-      def repo_id(name)
-        sql = "SELECT id FROM repos WHERE name = (?)"
-        Reflector::Database.connection.execute(sql, name)[0]["id"]
-      end
+    #Need to debug why we're getting nil method names here
+    def method_id(name)
+      sql = "SELECT id FROM methods WHERE name = (?)"
+      Reflector::Database.connection.execute(sql, name.to_s)[0]["id"]
+    end
 
-      def method_name(id)
-        sql = "SELECT name FROM methods WHERE id = (?)"
-        Reflector::Database.connection.execute(sql, id)[0]["name"]
-      end
+    def repo_id(name)
+      sql = "SELECT id FROM repos WHERE name = (?)"
+      Reflector::Database.connection.execute(sql, name)[0]["id"]
+    end
 
-      def repo_name(id)
-        sql = "SELECT name FROM repos WHERE id = (?)"
-        Reflector::Database.connection.execute(sql, id)[0]["name"]
-      end
+    def method_name(id)
+      sql = "SELECT name FROM methods WHERE id = (?)"
+      Reflector::Database.connection.execute(sql, id)[0]["name"]
+    end
+
+    def repo_name(id)
+      sql = "SELECT name FROM repos WHERE id = (?)"
+      Reflector::Database.connection.execute(sql, id)[0]["name"]
+    end
 
 
   end
