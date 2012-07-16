@@ -15,11 +15,9 @@ module Reflector
     end
 
     def self.connection
-        unless @connection
-          @connection = SQLite3::Database.new(@@file_path)
-          @connection.results_as_hash = true
-        end
-        @connection
+      @connection ||= SQLite3::Database.new(@@file_path)
+      @connection.results_as_hash = true
+      @connection
     end
 
     def repos_write(opts = {})
