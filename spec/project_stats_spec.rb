@@ -1,13 +1,11 @@
 require 'spec_helper'
 
-include Reflector
+describe Reflector::ProjectStats do
 
-describe ProjectStats do
-
-  let(:project) { ProjectStats.new("newproject") }
+  let(:project) { Reflector::ProjectStats.new("newproject") }
 
   it "initializes correctly" do
-    project.should be_an_instance_of ProjectStats
+    project.should be_an_instance_of Reflector::ProjectStats
     project.name.should eq "newproject"
   end
 

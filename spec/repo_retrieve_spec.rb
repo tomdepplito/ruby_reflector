@@ -1,19 +1,17 @@
 require 'spec_helper'
 
-include Reflector
-
-describe RepoRetrieve do
+describe Reflector::RepoRetrieve do
 
   it "will not initialize a new repo without a url" do
-    expect { fail_retrieve = RepoRetrieve.new }.should raise_error
+    expect { fail_retrieve = Reflector::RepoRetrieve.new }.should raise_error
   end
 
   before :all do
-    @retrieve = RepoRetrieve.new("https://github.com/Devbootcamp/RR_RnR")
+    @retrieve = Reflector::RepoRetrieve.new("https://github.com/Devbootcamp/RR_RnR")
   end
 
   it "initializes a new repo retrieve when passed a github url" do
-    @retrieve.should be_an_instance_of RepoRetrieve
+    @retrieve.should be_an_instance_of Reflector::RepoRetrieve
   end
 
   it "locates the clone url based on the github url" do

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-include Reflector
-
-describe Database do
+describe Reflector::Database do
   def database_path
     File.join(root_path, 'db', 'test.db')
   end

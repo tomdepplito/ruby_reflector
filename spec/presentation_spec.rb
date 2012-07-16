@@ -1,14 +1,12 @@
 require 'spec_helper'
 
-include Reflector
+describe Reflector::Presentation do
 
-describe Presentation do
-
-  let(:project) { Presentation.new([{"name"=>"length", "count"=>3},{"name"=>"map", "count"=>1}], "RnR") }
+  let(:project) { Reflector::Presentation.new([{"name"=>"length", "count"=>3},{"name"=>"map", "count"=>1}], "RnR") }
 
   context "initialize" do
     it "should initialize with method name and stats"  do
-      project.should be_an_instance_of Presentation
+      project.should be_an_instance_of Reflector::Presentation
     end
   end
 

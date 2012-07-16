@@ -1,19 +1,17 @@
 require 'spec_helper'
 
-include Reflector
-
-describe Library do
+describe Reflector::Library do
 
   it "will not initialize without the target library" do
-    expect { doc = Library.new }.should raise_error
+    expect { doc = Reflector::Library.new }.should raise_error
   end
 
   before :all do
-    @class_doc = Library.new('http://ruby-doc.org/core-1.9.3/')
+    @class_doc = Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
   end
 
   it "initializes a new library" do
-    @class_doc.should be_an_instance_of Library
+    @class_doc.should be_an_instance_of Reflector::Library
   end
 
   it "returns a library hash with class keys and arrays of their respective methods" do
