@@ -18,7 +18,7 @@ require '../lib/presentation.rb'
 @url = ARGV[0]
 
 
-@repository = Reflector::RepoRetrieve.new(@url)
+@repository = Reflector::RepoRetriever.new(@url)
 @db = Reflector::Database.new('../db/reflector.db')
 
 

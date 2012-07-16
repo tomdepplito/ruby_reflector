@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 module Reflector
-  class RepoRetrieve
+  class RepoRetriever
     attr_reader :clone_url, :repository_name
 
     def initialize(repo_url)
@@ -14,11 +14,15 @@ module Reflector
     end
 
     def clone_repository
-      system "git clone #@clone_url ../repos/#@repository_name"
+      system "git clone #@clone_url #{repo_path}/#@repository_name"
     end
 
     def delete_repository
-      system "rm -rf ../repos/#@repository_name"
+      system "rm -rf #{repo_path}/#@repository_name"
+    end
+
+    def repo_path
+      File.expand_path(File.join(File.dirname(__FILE__), '..', 'repos'))
     end
   end
 end
