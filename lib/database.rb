@@ -6,7 +6,7 @@ module Reflector
     def initialize(file_path)
       @@file_path = file_path
       @db = SQLite3::Database.new(file_path)
-      schema_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'db', 'schema.sql'))
+      schema_path = File.expand_path(File.join(ROOT_PATH, 'db', 'schema.sql'))
       @db.execute_batch(File.read(schema_path))
       unless methods_read.count > 849
         methods_write
@@ -25,11 +25,6 @@ module Reflector
       Reflector::Database.connection.execute(sql, opts.fetch(:name), opts.fetch(:url), opts.fetch(:clone_url), opts.fetch(:last_commit_date), Time.now.to_s, Time.now.to_s)
       #Not sure about the :name fetch here
       methods_stats_write(opts.fetch(:methods), opts.fetch(:name))
-    end
-
-    def repos_get
-      sql = "SELECT * FROM repos"
-      Reflector::Database.connection.execute(sql)
     end
 
     def methods_write

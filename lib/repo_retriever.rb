@@ -22,7 +22,7 @@ module Reflector
     end
 
     def repo_path
-      File.expand_path(File.join(File.dirname(__FILE__), '..', 'repos'))
+      File.expand_path(File.join(ROOT_PATH, 'repos'))
     end
   end
 end

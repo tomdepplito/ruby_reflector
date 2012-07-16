@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Reflector::Parser do
-  let(:file_path) { File.join(File.dirname(__FILE__), 'test_file.rb') }
+  let(:file_path) { File.join(ROOT_PATH, 'spec', 'test_file.rb') }
 
   describe '#method_array' do
     it 'should print out all method calls' do

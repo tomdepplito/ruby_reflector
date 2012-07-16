@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Reflector::DirParser do
-  let(:directory) { Reflector::DirParser.new(File.join(root_path, 'spec')) }
+  let(:directory) { Reflector::DirParser.new(File.join(ROOT_PATH, 'spec')) }
 
   # How do we just fix this so it doesn't error out?  Same goes for the
   # project as a whole

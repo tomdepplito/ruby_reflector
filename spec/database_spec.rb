@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Reflector::Database do
 
-  let(:database_path) { File.join(root_path, 'db', 'test.db') }
+  let(:database_path) { File.join(ROOT_PATH, 'db', 'test.db') }
   let(:db) { SQLite3::Database.new(database_path) }
   let!(:database) { Reflector::Database.new(database_path) }
 
@@ -35,12 +35,6 @@ describe Reflector::Database do
     db.execute("SELECT * FROM repos").first[2].should eq "https://github.com/Devbootcamp/RR_RnR"
     db.execute("SELECT * FROM repos").first[3].should eq "https://github.com/Devbootcamp/RR_RnR.git"
     db.execute("SELECT * FROM repos").first[4].should eq "NULL"
-  end
-
-  it "return result set from the repos table" do
-    repos_rows = db.execute ("SELECT COUNT(*) FROM repos")
-    rs = database.repos_get
-    rs.count.should eq repos_rows[0][0]
   end
 
   it "writes the repo and its methods to the db" do

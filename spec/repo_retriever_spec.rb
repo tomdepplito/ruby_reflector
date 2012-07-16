@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Reflector::RepoRetriever do
 
-  let(:repos_path) { File.join(root_path, 'repos') }
+  let(:repos_path) { File.join(ROOT_PATH, 'repos') }
 
   before :all do
     @retriever = Reflector::RepoRetriever.new("https://github.com/Devbootcamp/RR_RnR")
