@@ -1,4 +1,4 @@
-require 'find'
+require_relative '../init'
 
 module Reflector
   class DirParser

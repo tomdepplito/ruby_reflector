@@ -1,4 +1,4 @@
-require 'sqlite3'
+require_relative '../init'
 
 module Reflector
   class Database

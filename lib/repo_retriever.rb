@@ -1,5 +1,4 @@
-require 'nokogiri'
-require 'open-uri'
+require_relative '../init'
 
 module Reflector
   class RepoRetriever

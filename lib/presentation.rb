@@ -1,4 +1,3 @@
-
 module  Reflector
 
   class Presentation
