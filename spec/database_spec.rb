@@ -17,7 +17,7 @@ describe Database do
   end
 
   it "the database exists" do
-    File.exists?( database_path ).should be_true
+    File.exists?(database_path).should be_true
   end
 
   it "writes the methods library to the db" do
