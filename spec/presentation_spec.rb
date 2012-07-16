@@ -1,7 +1,4 @@
-require 'simplecov'
-SimpleCov.start
-require 'rspec'
-require '../lib/presentation.rb'
+require 'spec_helper'
 
 include Reflector
 

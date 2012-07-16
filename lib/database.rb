@@ -6,7 +6,8 @@ module Reflector
     def initialize(file_path)
       @@file_path = file_path
       @db = SQLite3::Database.new( file_path )
-      @db.execute_batch( File.read('../db/schema.sql') )
+      schema_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'db', 'schema.sql'))
+      @db.execute_batch( File.read(schema_path) )
       unless methods_read.count > 849
         methods_write
       end

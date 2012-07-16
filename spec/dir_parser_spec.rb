@@ -1,6 +1,4 @@
-require 'spec_helper.rb'
-require '../lib/dir_parser.rb'
-
+require 'spec_helper'
 
 include Reflector
 
@@ -13,7 +11,7 @@ describe DirParser do
   end
 
   before :all do
-    @directory = DirParser.new(".")
+    @directory = DirParser.new(File.join(root_path, 'spec'))
   end
 
   it "initializes with a file path" do
@@ -21,8 +19,8 @@ describe DirParser do
   end
 
   it "reads a directory into an array of its file names" do
-    @directory.files.should include "./dir_parser_spec.rb"
-    @directory.files.should include "./file_parser_spec.rb"
+    @directory.files.should include __FILE__
+    @directory.files.should include File.join(File.dirname(__FILE__), "file_parser_spec.rb")
   end
 
   it "only includes filenames with .rb at the end" do

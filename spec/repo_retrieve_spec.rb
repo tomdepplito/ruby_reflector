@@ -1,5 +1,4 @@
-require '../lib/repo_retrieve.rb'
-require 'spec_helper.rb'
+require 'spec_helper'
 
 include Reflector
 

@@ -1,20 +1,21 @@
-require '../lib/database.rb'
-require '../lib/library.rb'
-require 'spec_helper.rb'
+require 'spec_helper'
 
 include Reflector
 
 describe Database do
-    let( :database ) { Reflector::Database.new("../db/reflector_test.db") }
-    let( :db ) { SQLite3::Database.new("../db/reflector_test.db") }
+    def database_path
+      File.join(root_path, 'db', 'test.db')
+    end
+    let( :database ) { Reflector::Database.new(database_path) }
+    let( :db ) { SQLite3::Database.new(database_path) }
 
     after :all do
-      File.delete('../db/reflector_test.db')
+      File.delete(database_path)
     end
 
     it "the database exists" do
       database
-      File.exists?( "../db/reflector_test.db" ).should be_true
+      File.exists?( database_path ).should be_true
     end
 
     it "writes the methods library to the db" do
