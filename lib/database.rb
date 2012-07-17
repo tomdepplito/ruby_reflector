@@ -5,13 +5,13 @@ module Reflector
 
     def initialize(file_path)
       @@file_path = file_path
-      @db = SQLite3::Database.new(file_path)
+      db = SQLite3::Database.new(file_path)
       schema_path = File.expand_path(File.join(ROOT_PATH, 'db', 'schema.sql'))
-      @db.execute_batch(File.read(schema_path))
+      db.execute_batch(File.read(schema_path))
       unless methods_read.count > 849
         methods_write
       end
-      @db.close
+      db.close
     end
 
     def self.connection
@@ -28,8 +28,8 @@ module Reflector
     end
 
     def methods_write
-      @lib ||= Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
-      @lib.methods_list.each do |method|
+      lib ||= Reflector::Library.new('http://ruby-doc.org/core-1.9.3/')
+      lib.methods_list.each do |method|
         sql = "INSERT INTO methods (name,created_at,updated_at) VALUES (?,?,?)"
         Reflector::Database.connection.execute(sql,method,Time.now.to_s, Time.now.to_s)
       end
