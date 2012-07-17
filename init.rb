@@ -6,3 +6,5 @@ require 'nokogiri'
 require 'open-uri'
 
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
+
+ENV['database'] ||= File.join(ROOT_PATH, 'db', 'reflector.db')

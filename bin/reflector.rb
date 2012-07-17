@@ -25,13 +25,12 @@ project_stats.inc_stats(methods)
 
 puts project_stats.stats_results
 
-db.repos_write({
-    :url => "https://github.com/Devbootcamp/RR_RnR",
-    :clone_url => repository.clone_url,
-    :last_commit_date => "NULL",
-    :name => repository.repository_name,
-    :methods => project_stats.stats_results
-})
+repo = Reflector::Repo.create(:url => "https://github.com/Devbootcamp/RR_RnR",
+                              :clone_url => repository.clone_url,
+                              :last_commit_date => "NULL",
+                              :name => repository.repository_name)
+
+db.methods_stats_write(project_stats.stats_results, repository.repository_name)
 
 presentation = Reflector::Presentation.new(db.methods_stats_read(repository.repository_name), repository.repository_name)
 puts presentation.console_print
