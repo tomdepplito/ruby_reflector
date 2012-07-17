@@ -1,36 +1,17 @@
-#!/usr/bin/ruby
-#docopt?
-require '../lib/dir_parser.rb'
-require '../lib/repo_retrieve.rb'
-require '../lib/file_parser.rb'
-require '../lib/project_stats.rb'
-require '../lib/database.rb'
-require '../lib/library.rb'
-require '../lib/presentation.rb'
+#!/usr/bin/env ruby
+require_relative '../init'
 
-####################
-#This is just here for testing
-####################
-
-# system 'rm -rf ../repos/*.*'
-
+Dir.glob(File.join(ROOT_PATH, 'lib', '**', '*.rb')).each do |file|
+  require file
+end
 
 @url = ARGV[0]
-
 
 @repository = Reflector::RepoRetriever.new(@url)
 @db = Reflector::Database.new('../db/reflector.db')
 
 
 @files = Reflector::DirParser.new("../repos/" + @repository.repository_name).files # Gives us all our files
-
-
-puts "Creating our local database"
-#@db = Reflector::Database.new('../db/reflector.db')
-
-# write the library to the DB FIRST!!!!!!
-# puts "Creating our ruby library"
-# @library.methods_list.each { |method| @db.methods_write(method) }
 
 # parses each file
 # does the lookup to the library
