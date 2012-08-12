@@ -1,13 +1,1 @@
-Ruby Reflector
-==============
-The Ruby Reflector app takes a Github URL like https://github.com/Devbootcamp/RR_RnR and analyzes the frequency of Core Library Ruby methods called in the application.
-
----------------
-* See top methods used for your projects
-* Visualizations of method frequency (Coming soon!)
-* Compares to the top 25 Ruby projects
-
-Usage:
-
-```$ ruby reflector.rb https://github.com/Devbootcamp/RR_RnR```
-
+This is an awesome command line application that allows you to submit a github repo URL and find out what methods you use most frequently (currently only for Ruby).
